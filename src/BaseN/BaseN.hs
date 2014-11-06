@@ -28,6 +28,8 @@ readBaseN c x =
 encodeBaseN :: [Char] -> Int-> [Char]
 encodeBaseN c i 
   | i < clen = [c !! i] 
-  | otherwise = let index = (mod i clen)  in  encodeBaseN c (div (i - index) clen)  ++ [(c !! index)]
-    where clen = (length c)
+  | otherwise =  encodeBaseN c nextIndex  ++ [(c !! index)]
+  where clen  = (length c)
+        index = (mod i clen)
+        nextIndex = (div (i - index) clen)
 
