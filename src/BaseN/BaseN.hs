@@ -11,19 +11,22 @@ import Data.Maybe(fromJust,isJust)
 
 base10CharSet = ['0'..'9']
 
-data BaseN = BaseN [Char] Integer deriving(Show)
+data BaseN = BaseN [Char] Int 
+
 instance Num BaseN where
   (BaseN c x) + (BaseN c' y)  = (BaseN c (x + y)) 
   (BaseN c x) * (BaseN c' y)  = (BaseN c (x * y)) 
   abs (BaseN c x)  = BaseN c (abs x)
   signum (BaseN c x) = BaseN c (signum x)
-  fromInteger i  =  BaseN base10CharSet i 
   negate (BaseN c x) = BaseN c (negate x) 
 
-readBaseN :: [Char] -> [Char] -> (Maybe Integer)
+instance Show BaseN where
+    show (BaseN c x) = encodeBaseN c x
+
+readBaseN :: [Char] -> [Char] -> (Maybe Int)
 readBaseN c x = 
     let nums = [elemIndex y c | y <- x ] 
-     in if all isJust nums then Just (toInteger $ foldl (\acc x -> acc + 2 * fromJust x) 0   nums)  else Nothing  
+     in if all isJust nums then Just (foldl (\acc x -> acc + 2 * fromJust x) 0   nums)  else Nothing  
 
 encodeBaseN :: [Char] -> Int-> [Char]
 encodeBaseN c i 

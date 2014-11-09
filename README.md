@@ -13,3 +13,4 @@ Convert between base 10 and base 1114015
 Compiled with ghc 7.8.3 -O2 Main.hs && time ./Main
     
     0.11s user 0.03s system 93% cpu 0.148 total
+putStrLn "\128347\128336\128337\128338\128339\128340\128341\128342\128344"
